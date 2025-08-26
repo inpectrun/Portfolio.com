@@ -401,18 +401,18 @@ fieldset {
   outline: 4px solid var(--color-highlight);
   outline-offset: 0;
 }
-
 .fs-textarea {
   appearance: none;
   border-radius: 0.75rem;
   border-width: 0;
   box-shadow: var(--color-border-default) 0 0 0 1px inset;
-  color: #FFFFFF;
+  color: #111; /* typed text = white */
   font-size: 1rem;
   line-height: 1.5rem;
   outline: none;
   padding: 0.5rem 0.75rem;
   resize: vertical;
+  background-color: #ffffff; /* dark background so white text is visible */
 }
 
 .fs-textarea:focus-visible {
@@ -420,7 +420,7 @@ fieldset {
 }
 
 .fs-textarea::placeholder {
-  color: #FFFFFF;
+  color: #00ff00; /* slightly lighter gray for readability */
 }
 
 /** Utilities **/
