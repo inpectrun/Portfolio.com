@@ -1,9 +1,3 @@
-body {
-  font-family: Arial, sans-serif;
-  padding: 40px;
-  background: #f9f9f9;
-}
-
 #aboutBtn {
   font-size: 16px;
   cursor: pointer;
@@ -72,7 +66,7 @@ body {
   margin-left: 10px;              /* Optional: shifts block slightly right */
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@600;700&display=swap");
 
 /** Variables **/
 
@@ -482,28 +476,222 @@ fieldset {
 }
 
 
-<style>
-  .lightbox-overlay {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-  }
+.s-intro {
+  background-color: #000000;
+}
 
-  .lightbox-overlay img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 10px;
-    box-shadow: 0 0 20px #000;
-  }
+#intro-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
 
-  .lightbox-overlay:active {
-    cursor: zoom-out;
-  }
-</style>
+.s-intro__content-pretitle,
+.s-intro__content-title,
+.s-intro__content-title .typing-title,
+.s-intro__content-btns a {
+  color: #ffffff;
+}
 
+.s-intro__social a svg {
+  fill: #ffffff !important;
+}
+
+.id-lanyard__strap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: visible;
+  pointer-events: none;
+}
+
+#idStrapLine {
+  fill: none;
+  stroke: #b99566;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+/* Thin dashed overlay on top of the rope path to fake a twisted-twine texture */
+#idStrapTwist {
+  fill: none;
+  stroke: #7a5c39;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 7 7;
+  opacity: 0.65;
+}
+
+#idStrapRing {
+  fill: #2a2a2a;
+  stroke: #666;
+  stroke-width: 2;
+}
+
+.id-lanyard {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 3;
+}
+
+/* Bulldog-clip look: a small black body plus two triangular "ears" */
+.id-lanyard__clip {
+  position: absolute;
+  top: 0;
+  left: -16px;
+  width: 32px;
+  height: 14px;
+  background: linear-gradient(#3a3a3a, #161616);
+  border-radius: 2px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.id-lanyard__clip-arm {
+  position: absolute;
+  top: 100%;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #232323;
+}
+
+.id-lanyard__clip-arm--l { left: 2px; }
+.id-lanyard__clip-arm--r { right: 2px; }
+
+.id-lanyard__card {
+  position: absolute;
+  top: 340px;
+  left: -115px;
+  width: 230px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55));
+}
+
+.id-lanyard__card.dragging {
+  cursor: grabbing;
+}
+
+/* Polaroid-style photo card: thick print border, caption in a
+   handwritten-style font beneath the photo, like a pinned keepsake. */
+.id-polaroid {
+  width: 100%;
+  background: #fafaf8;
+  border-radius: 4px;
+  padding: 14px 14px 20px;
+  box-sizing: border-box;
+}
+
+.id-polaroid__photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #000;
+}
+
+.id-polaroid__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.05);
+  pointer-events: none;
+}
+
+.id-polaroid__photo-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.25s ease;
+}
+
+.id-polaroid__photo-img--default {
+  position: static;
+  opacity: 1;
+}
+
+.id-polaroid__photo-img--hover {
+  opacity: 0;
+}
+
+.id-polaroid__photo:hover .id-polaroid__photo-img--hover {
+  opacity: 1;
+}
+
+.id-polaroid__caption {
+  padding-top: 14px;
+  text-align: center;
+}
+
+.id-polaroid__name {
+  font-family: "Caveat", cursive;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.id-polaroid__role {
+  margin-top: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+}
+
+
+/* Icon highlight row under the About Me copy */
+.s-about__highlights {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px;
+  margin-top: 30px;
+}
+
+.s-about__highlight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 28px;
+  border-right: 1px solid var(--color-border-default, rgba(255, 255, 255, 0.15));
+}
+
+.s-about__highlight:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.s-about__highlight svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--color-1);
+}
+
+.s-about__highlight span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .s-about__highlight {
+    border-right: none;
+    padding-right: 0;
+  }
+}
 
 

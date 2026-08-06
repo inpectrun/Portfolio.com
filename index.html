@@ -5,21 +5,34 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>Cedric Darren Ceniza — Full Stack Developer</title>
+    <meta name="description" content="Portfolio of Cedric Darren Ceniza, a Full Stack Developer specializing in PHP/CodeIgniter, Python/Flask, MySQL, and modern JavaScript.">
 
     <script>
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
+
+        (function() {
+            const saved = localStorage.getItem('theme');
+            const theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        })();
     </script>
 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Caveat:wght@600;700&display=swap">
 
     <link rel="stylesheet" href="css/vendor.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/add.css">
+    <link rel="stylesheet" href="css/premium.css">
 
 
 
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
@@ -58,15 +71,22 @@
                     <a class="s-header__menu-toggle" href="#0"><span>Menu</span></a>
                 </div>
 
-                <nav class="s-header__nav">    
+                <nav class="s-header__nav">
                     <ul class="s-header__menu-links">
                         <li class="current"><a class="smoothscroll" href="#intro">Home</a></li>
                         <li><a class="smoothscroll" href="#about" id="aboutBtn">About</a></li>
+                        <li><a class="smoothscroll" href="#experience">Experience</a></li>
                         <li><a class="smoothscroll" href="#Resume">Resume</a></li>
+                        <li><a class="smoothscroll" href="#skills" id="skillsBtn">Skills</a></li>
                         <li><a class="smoothscroll" href="#portfolio">Portfolio</a></li>
                         <li><a class="smoothscroll" href="#footer">Contact</a></li>
                     </ul>
                 </nav>
+
+                <button type="button" id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
 
             </div>
         </header>
@@ -75,22 +95,54 @@
 
         <section id="intro" class="s-intro target-section">
 
+            <div class="s-intro__blobs" aria-hidden="true">
+                <span class="s-intro__blob s-intro__blob--1"></span>
+                <span class="s-intro__blob s-intro__blob--2"></span>
+            </div>
+
+            <canvas id="intro-particles"></canvas>
+
+            <svg class="id-lanyard__strap" id="idStrapSvg">
+                <path id="idStrapLine" d=""></path>
+                <path id="idStrapTwist" d=""></path>
+                <circle id="idStrapRing" r="7" cx="0" cy="0"></circle>
+            </svg>
+
+            <div class="id-lanyard" id="idLanyard">
+                <div class="id-lanyard__clip" id="idClip">
+                    <span class="id-lanyard__clip-arm id-lanyard__clip-arm--l"></span>
+                    <span class="id-lanyard__clip-arm id-lanyard__clip-arm--r"></span>
+                </div>
+                <div class="id-lanyard__card" id="idCard">
+                    <div class="id-polaroid">
+                        <div class="id-polaroid__photo">
+                            <img class="id-polaroid__photo-img id-polaroid__photo-img--default" src="images/pic-id.png" alt="Cedric Darren Ceniza">
+                            <img class="id-polaroid__photo-img id-polaroid__photo-img--hover" src="images/pic-id-hover.png" alt="Cedric Darren Ceniza">
+                        </div>
+                        <div class="id-polaroid__caption">
+                            <div class="id-polaroid__name">Cedric D. Ceniza</div>
+                            <div class="id-polaroid__role">Full Stack Developer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row s-intro__content width-sixteen-col">
                 <div class="column lg-12 s-intro__content-inner grid-block grid-16">
 
-                    <div class="s-intro__content-text">
+                    <div class="s-intro__content-text" id="heroParallax">
 
-                        <div class="s-intro__content-pretitle text-pretitle">Hello</div>
-                       <h1 class="s-intro__content-title" style="font-size: 60px;">
-                          I'm Cedric Darren Ceniza <br>
-                          <span class="typing-title">Aspiring Web Developer</span>
+                        <div class="s-intro__content-pretitle text-pretitle">Hello, I am</div>
+                       <h1 class="s-intro__content-title">
+                          Cedric Darren Ceniza <br>
+                          <span class="typing-title" id="typingTitle" data-roles="Full Stack Developer,Problem Solver">Full Stack Developer</span>
                         </h1>
 
 
 
                         <div class="s-intro__content-btns">
-                            <a class="smoothscroll btn" href="#about">More About Me</a>
-                            <a class="smoothscroll btn btn--stroke" href="#footer">Get In Touch</a>
+                            <a class="smoothscroll btn btn--magnetic" href="#about">More About Me</a>
+                            <a class="smoothscroll btn btn--stroke btn--magnetic" href="#footer">Get In Touch</a>
                         </div>
 
                     </div>
@@ -130,10 +182,6 @@
                     </a>
                 </li>
             </ul>
-            <div class="s-intro__content-media">                               
-                <img src="images/pic.jpeg" srcset="images/pic.jpeg 1x, images/pic.jpeg 2x" alt="">
-            </div>
-
             <div class="s-intro__btn-download">
     <a class="btn btn--stroke" href="File/CV.pdf" download="CV.pdf">
         Get My CV
@@ -163,16 +211,39 @@
 
 
                     <p class="attention-getter">
-                    Hello I am Cedric Darren Ceniza an aspiring Web Developer and Software Engineer. I love and enjoy coding so much. This is not just about coding this is life.
+                    Hello, I'm Cedric Darren Ceniza, a Full Stack Developer and aspiring Software Engineer with a strong passion for building meaningful and impactful web applications.
                     </p>
 
                     <p class="attention-getter">
-
+                    I enjoy turning ideas into functional solutions — from creating clean and user-friendly interfaces to building efficient and scalable backend systems. I'm constantly learning new technologies and improving my skills to stay up-to-date in this fast-evolving industry.
                     </p>
+
+                    <p class="attention-getter">
+                    For me, coding is more than just writing code — it's about solving problems, creating value, and making a difference through technology.
+                    </p>
+
+                    <div class="s-about__highlights" data-aos="fade-up">
+                        <div class="s-about__highlight">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            <span>Web Development</span>
+                        </div>
+                        <div class="s-about__highlight">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                            <span>Backend Development</span>
+                        </div>
+                        <div class="s-about__highlight">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg>
+                            <span>UI/UX Focused</span>
+                        </div>
+                        <div class="s-about__highlight">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
+                            <span>Always Learning</span>
+                        </div>
+                    </div>
 
                     <div class="grid-list-items s-about__blocks">
 
-                        <div class="grid-list-items__item s-about__block">
+                        <div class="grid-list-items__item s-about__block" data-aos="fade-up">
                             <h4 class="s-about__block-title">Other Info:</h4>
                             <ul class="s-about__list">
                                 <li>
@@ -195,7 +266,7 @@
                             </ul>
                         </div> <!--end s-about__block -->
 
-                        <div class="grid-list-items__item s-about__block">
+                        <div class="grid-list-items__item s-about__block" data-aos="fade-up" data-aos-delay="100">
     <h4 class="s-about__block-title">Soft Skills</h4>
 
     <ul class="s-about__list" style="list-style-type: disc; padding-left: 20px;">
@@ -205,46 +276,6 @@
         <li>Communication</li>
     </ul>
 </div>
-
- <div class="grid-list-items__item s-about__block">
-                            <h4 class="s-about__block-title">Languages</h4>
-
-                            <ul class="s-about__list">
-                                <li>
-                                    <div class="skill-container">
-                                    <div class="skill-label">HTML</div>
-                                    <div class="skill-bar">
-                                      <div class="skill-fill" data-percent="90%">90%</div>
-                                    </div>
-                                  </div>
-                                </li>
-                                <li>
-                                    <div class="skill-container">
-                                    <div class="skill-label">CSS</div>
-                                    <div class="skill-bar">
-                                      <div class="skill-fill" data-percent="80%">80%</div>
-                                    </div>
-                                  </div>
-                                </li>
-                                <li>
-                                    <div class="skill-container">
-                                    <div class="skill-label">Python</div>
-                                    <div class="skill-bar">
-                                      <div class="skill-fill" data-percent="90%">90%</div>
-                                    </div>
-                                  </div>
-                                </li>
-                                <li>
-                                   <div class="skill-container">
-                                    <div class="skill-label">Javascript</div>
-                                    <div class="skill-bar">
-                                      <div class="skill-fill" data-percent="70%">50%</div>
-                                    </div>
-                                  </div>
-                                </li>
-
-                            </ul>
-                        </div>
 
 
 
@@ -260,32 +291,76 @@
                 </section></div>
 
 
+        <!-- # experience
+        ================================================== -->
+        <section id="experience" class="s-works target-section">
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="section-header" data-num="02" data-aos="fade-right">
+                        <h2 class="text-display-title">Experience.</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="timeline">
+
+                        <div class="timeline__item" data-aos="fade-up">
+                            <div class="timeline__dot"></div>
+                            <div class="timeline__card">
+                                <div class="timeline__card-head">
+                                    <h4 class="timeline__role">Full Stack Developer</h4>
+                                    <span class="timeline__date">Current</span>
+                                </div>
+                                <p class="timeline__company">Comcare Insurance Agency</p>
+                                <ul class="timeline__list">
+                                    <li>Develop and maintain full-stack web applications.</li>
+                                    <li>Build responsive and user-friendly interfaces.</li>
+                                    <li>Develop backend functionality using PHP (CodeIgniter).</li>
+                                    <li>Manage MySQL databases.</li>
+                                    <li>Create CRUD modules and business logic.</li>
+                                    <li>Fix bugs and optimize existing systems.</li>
+                                    <li>Improve website performance.</li>
+                                    <li>Test applications before deployment.</li>
+                                    <li>Collaborate using Git and GitHub.</li>
+                                    <li>Maintain production systems.</li>
+                                    <li>Continuously improve UI/UX.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
         <!-- # RESUME
         ================================================== -->
         <section id="Resume" class="s-works target-section">
 
             <div class="row">
                 <div class="column xl-12">
-                    <div class="section-header" data-num="02" data-aos="fade-right">
+                    <div class="section-header" data-num="03" data-aos="fade-right">
     <h2 class="text-display-title">Resume</h2>
 </div>
 
 <h4 data-aos="fade-left">EDUCATIONAL BACKGROUND</h4>
 
-<div class="data-info edu-entry py-3" data-aos="fade-up">
-</div>
-
-                    <div class="data-info edu-entry py-3 aos-init aos-animate" data-aos="fade-up">
+                    <div class="data-info edu-entry py-3" data-aos="fade-up">
                       <h5 class="info-title">100 Days of Code: The Complete Python Pro Bootcamp</h5>
                       <p><span class="meta-date">2025</span> | Udemy</p>
                     </div>
 
-                    <div class="data-info edu-entry py-3 aos-init aos-animate" data-aos="fade-up">
+                    <div class="data-info edu-entry py-3" data-aos="fade-up" data-aos-delay="100">
                       <h5 class="info-title">Bachelor of Science in Criminology</h5>
                       <p><span class="meta-date">2020 – 2024</span> | University of Mindanao</p>
                     </div>
 
-                    <div class="data-info edu-entry py-3 aos-init aos-animate" data-aos="fade-up">
+                    <div class="data-info edu-entry py-3" data-aos="fade-up" data-aos-delay="200">
                       <h5 class="info-title">Computer Systems Servicing</h5>
                       <p><span class="meta-date">2016 – 2020</span> | Nieves Villarica National High School</p>
                     </div>
@@ -293,21 +368,16 @@
                    <h4>MY CERTIFICATION</h4>
 <div class="cert-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
 
-  <div class="cert-card aos-init aos-animate" data-aos="fade-up">
-    <img src="images/udemy.png" alt="Udemy Certificate">
+  <div class="cert-card" data-aos="fade-up">
+    <img src="images/udemy.png" alt="Udemy Certificate" loading="lazy">
     <p style="margin-top: 10px;"><strong>Python for Data Science</strong><br><span class="meta-date">2025 | Udemy</span></p>
   </div>
 
-  <div class="cert-card aos-init aos-animate" data-aos="fade-up">
-    <img src="images/sh.jpeg" alt="SHS Certificate" style="width: 400px; height: 295px;">
+  <div class="cert-card" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/sh.jpeg" alt="SHS Certificate" loading="lazy">
 
 
     <p style="margin-top: 10px;"><strong>Computer System Servicing</strong><br><span class="meta-date">2021 | Nieves Villarica SHS</span></p>
-  </div>
-
-  <div class="cert-card aos-init aos-animate" data-aos="fade-up">
-
-    <p style="margin-top: 10px;"><strong></strong><br><span class="meta-date"></span></p>
   </div>
 </div>
 
@@ -323,13 +393,103 @@
         </section> <!-- works-->
 
 
-        <!-- # numbers
+        <!-- # skills
+        ================================================== -->
+        <section id="skills" class="s-works target-section">
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="section-header" data-num="04" data-aos="fade-right">
+                        <h2 class="text-display-title">Skills.</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="skills-grid">
+
+                        <div class="skill-card" data-aos="fade-up">
+                            <h4 class="skill-card__title">Frontend</h4>
+
+                            <div class="skill-container">
+                                <div class="skill-label">HTML</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="90%">90%</div></div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="skill-label">CSS</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="85%">85%</div></div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="skill-label">JavaScript</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="75%">75%</div></div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="skill-label">Bootstrap</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="80%">80%</div></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                            <h4 class="skill-card__title">Backend</h4>
+
+                            <div class="skill-container">
+                                <div class="skill-label">PHP</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="85%">85%</div></div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="skill-label">CodeIgniter</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="80%">80%</div></div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="skill-label">Python</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="90%">90%</div></div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="skill-label">Flask</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="80%">80%</div></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                            <h4 class="skill-card__title">Database</h4>
+
+                            <div class="skill-container">
+                                <div class="skill-label">MySQL</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="85%">85%</div></div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="skill-label">SQL</div>
+                                <div class="skill-bar"><div class="skill-fill" data-percent="80%">80%</div></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                            <h4 class="skill-card__title">Tools</h4>
+
+                            <div class="tool-chip-list">
+                                <span class="tool-chip">Git</span>
+                                <span class="tool-chip">GitHub</span>
+                                <span class="tool-chip">Composer</span>
+                                <span class="tool-chip">XAMPP</span>
+                                <span class="tool-chip">VS Code</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- # portfolio
         ================================================== -->
       <section id="portfolio" class="s-works target-section">
 
             <div class="row">
                 <div class="column xl-12">
-                    <div class="section-header" data-num="03" data-aos="fade-right">
+                    <div class="section-header" data-num="05" data-aos="fade-right">
     <h2 class="text-display-title">My Works.</h2>
 </div>
 
@@ -339,19 +499,22 @@
 
             <div class="row folio-entries">
 
-                <div class="column entry">
+                <div class="column entry" data-aos="fade-up">
                    <a href="images/newpic.png" class="entry__link glightbox" data-glightbox="title: Fullstack Website; description: .entry__desc-01">
 
                         <div class="entry__thumb">
                            <img src="images/newpic.png"
      srcset="images/newpic.png x, images/newpic.png 1x"
-     alt="White Turban">
-
-
+     alt="White Turban" loading="lazy">
                         </div>
                         <div class="entry__info">
                             <h4 class="entry__title">Fullstack Website</h4>
                             <div class="entry__cat">Frontend/Backend Development</div>
+                            <div class="entry__badges">
+                                <span class="tech-badge">Flask</span>
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">SQLAlchemy</span>
+                            </div>
                         </div>
                     </a>
 
@@ -363,7 +526,32 @@
                     </div>
                 </div>
 
+                <div class="column entry" data-aos="fade-up" data-aos-delay="100">
+                   <a href="images/folio/comcare.jpg" class="entry__link glightbox" data-glightbox="title: COMCARE Insurance Agency System; description: .entry__desc-02">
 
+                        <div class="entry__thumb">
+                           <img src="images/folio/comcare.jpg"
+     srcset="images/folio/comcare.jpg x, images/folio/comcare.jpg 1x"
+     alt="COMCARE Insurance Agency System" loading="lazy">
+                        </div>
+                        <div class="entry__info">
+                            <h4 class="entry__title">COMCARE Insurance Agency System</h4>
+                            <div class="entry__cat">Fullstack Web App</div>
+                            <div class="entry__badges">
+                                <span class="tech-badge">PHP</span>
+                                <span class="tech-badge">CodeIgniter</span>
+                                <span class="tech-badge">MySQL</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="glightbox-desc entry__desc-02">
+                        <p>
+                        An admin dashboard system for COMCARE Insurance Agency (Balingasag) with role-based access, plan holder tracking, sales monitoring, branch management, and account status reports. Features interactive charts for tracking new sales and RIRA transactions across branches.
+                        <a href="https://staging.comcareinsurance.com/">Project Link</a>.
+                        </p>
+                    </div>
+                </div>
 
             </div>
 
@@ -371,13 +559,13 @@
 
 
 
-        <!-- # footer 
+        <!-- # footer
         ================================================== -->
          <footer id="footer" class="s-footer target-section" data-aos="fade-up">
 
     <div class="row">
         <div class="column lg-12">
-            <div class="section-header light-on-dark" data-num="04" data-aos="fade-right">
+            <div class="section-header light-on-dark" data-num="06" data-aos="fade-right">
                 <h2 class="text-display-title">Get In Touch.</h2>
             </div>
         </div>
@@ -388,7 +576,8 @@
 
         <div class="column xl-6 md-12 s-footer__block s-footer__about" data-aos="fade-up" data-aos-delay="100">
             <!-- Contact Form -->
-            <form action="https://formspree.io/f/mvgbpjzp" class="fs-form" target="_top" method="POST">
+            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+            <form action="https://formspree.io/f/mvgbpjzp" class="fs-form" id="contactForm" target="_top" method="POST">
                 <div class="fs-field">
                     <label class="fs-label" for="name">Your Name</label>
                     <input class="fs-input" id="name" name="name" required="">
@@ -449,16 +638,19 @@ darren-ceniza-a9a38a37a/">Linkedin</a></li>
 
                         <div class="column xl-6 md-6 tab-12">
                             <h5>Contact Me</h5>
-                            <ul class="s-about__list">
+                            <ul class="s-about__list contact-list">
                                 <li>
+                                    <svg class="contact-list__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 0 0-1.02.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.59l2.2-2.21a1 1 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1c0 9.39 7.61 17 17 17a1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1z"></path></svg>
                                     Phone:
                                     <span>+63 920-393-0914</span>
                                 </li>
                                 <li>
+                                    <svg class="contact-list__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"></path></svg>
                                     City:
                                     <span>Davao City, Philippines</span>
                                 </li>
                                 <li>
+                                    <svg class="contact-list__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"></path></svg>
                                     E-mail:
                                     <span>cenizadarren@gmail.com</span>
                                 </li>
@@ -512,41 +704,15 @@ darren-ceniza-a9a38a37a/">Linkedin</a></li>
 
     </div>
 
+    <a href="#top" class="smoothscroll ss-go-top" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M11.178 4.431a.998.998 0 0 1 1.644 0l9 13A.999.999 0 0 1 21 19H3a1.002 1.002 0 0 1-.822-1.569l9-13z"></path></svg>
+    </a>
 
 
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
-     <script src="js/add.js"></script>
-
-<script>
-  document.querySelectorAll('.cert-card img').forEach(img => {
-    img.addEventListener('click', function () {
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      lightboxImg.src = this.src;
-      lightbox.style.display = 'flex';
-    });
-  });
-</script>
-
-<script>
-  const form = document.querySelector("form");
-  form.addEventListener("submit", async function(event) {
-    event.preventDefault();
-    const data = new FormData(form);
-    const response = await fetch(form.action, {
-      method: form.method,
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-    if (response.ok) {
-      alert("Thank you! Your message has been sent.");
-      form.reset();
-    } else {
-      alert("Oops! Something went wrong.");
-    }
-  });
-</script>
+    <script src="js/add.js"></script>
+    <script src="js/premium.js"></script>
 
 </body>
 </html>
